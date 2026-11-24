@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --gold: #DCA52D;
+  --gold-accent: #FFB800;
+  --gold-dark: #B8861B;
+  --cream: #FBF9F5;
+  --ivory: #F8F6F0;
+  --border: #EAE5D9;
+  --muted: #666666;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+  font-family: var(--font-poppins), sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+::selection {
+  background-color: #DCA52D;
+  color: #FFFFFF;
+}
+
+/* Custom Luxury Scrollbar for Light Theme */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F6F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #DCA52D;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8861B;
+}
+
+/* Luxury transitions */
+a, button {
+  transition: all 0.25s ease-in-out;
+}
