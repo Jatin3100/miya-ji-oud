@@ -6,20 +6,23 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export default function ShopByCategory() {
   return (
-    <section id="categories" className="w-full bg-[#FBF9F5] py-14 md:py-24 border-y border-[#EAE5D9]/60">
-      <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="categories" className="w-full bg-[#FAF8F5] py-16 md:py-24 border-y border-[#EAE5D9]">
+      <div className="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Centered Golden Section Heading */}
         <ScrollReveal direction="up" duration={600}>
-          <div className="text-center mb-10 md:mb-14">
-            <h2 className="text-[#DCA52D] text-base md:text-lg lg:text-xl font-medium tracking-[0.25em] uppercase">
-              Shop by category
+          <div className="text-center mb-12 md:mb-16">
+            <span className="text-[#DCA52D] text-[11px] sm:text-xs font-semibold tracking-[0.3em] uppercase block mb-1">
+              Curated Collections
+            </span>
+            <h2 className="text-[#1A1A1A] font-serif text-2xl sm:text-3xl md:text-4xl font-normal tracking-[0.1em] uppercase">
+              Shop by Category
             </h2>
-            <div className="w-12 h-[2px] bg-[#DCA52D] mx-auto mt-3 rounded-full" />
+            <div className="w-16 h-[2px] bg-[#DCA52D] mx-auto mt-3 rounded-full" />
           </div>
         </ScrollReveal>
 
         {/* Two Centered Image Cards with Rounded Corners & Staggered Scroll Entrance */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {CATEGORIES.map((category, index) => (
             <ScrollReveal
               key={category.id}
@@ -30,7 +33,7 @@ export default function ShopByCategory() {
             >
               <Link
                 href={category.href}
-                className="group relative block aspect-square w-full overflow-hidden rounded-2xl border border-[#EAE5D9] shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(220,165,45,0.25)] transition-all duration-500"
+                className="group relative block aspect-square w-full overflow-hidden rounded-2xl border border-[#EAE5D9] shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-2 hover:border-[#DCA52D] hover:shadow-[0_20px_45px_rgba(220,165,45,0.25)] transition-all duration-500 bg-[#0A0A0A]"
               >
                 {/* Category Background Image */}
                 <Image
@@ -42,16 +45,19 @@ export default function ShopByCategory() {
                 />
 
                 {/* Ambient Overlay */}
-                <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors duration-300" />
 
                 {/* Subtle Luxury Sheen Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
 
                 {/* Ivory & Gold Category Label over the image */}
-                <div className="absolute inset-0 flex items-center justify-center p-4">
-                  <div className="bg-[#FFFFFF]/95 backdrop-blur-md border border-[#DCA52D] px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl shadow-[0_4px_25px_rgba(0,0,0,0.18)] transition-all duration-300 group-hover:border-[#B8861B] group-hover:shadow-[0_0_25px_rgba(220,165,45,0.4)] group-hover:scale-105">
-                    <span className="text-[#1A1A1A] group-hover:text-[#DCA52D] text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase whitespace-nowrap transition-colors">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                  <div className="bg-[#FFFFFF]/95 backdrop-blur-md border border-[#DCA52D] px-7 sm:px-9 py-3 sm:py-4 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-all duration-300 group-hover:border-[#B8861B] group-hover:shadow-[0_0_30px_rgba(220,165,45,0.4)] group-hover:scale-105 text-center">
+                    <span className="text-[#1A1A1A] group-hover:text-[#DCA52D] font-serif text-sm sm:text-base font-bold tracking-[0.25em] uppercase block transition-colors">
                       {category.title}
+                    </span>
+                    <span className="text-[#777777] text-[10px] tracking-[0.15em] uppercase font-medium mt-1 block">
+                      Explore Collection →
                     </span>
                   </div>
                 </div>

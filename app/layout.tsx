@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins, Cinzel } from "next/font/google";
+import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/data/products";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body
-        className={`${poppins.variable} ${cinzel.variable} antialiased bg-[#FFFFFF] text-[#1A1A1A] min-h-screen selection:bg-[#DCA52D] selection:text-white`}
+        className={`${montserrat.variable} ${playfair.variable} antialiased bg-[#FFFFFF] text-[#1A1A1A] min-h-screen selection:bg-[#DCA52D] selection:text-white`}
       >
         {children}
       </body>

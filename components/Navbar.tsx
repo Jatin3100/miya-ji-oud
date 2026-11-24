@@ -30,15 +30,16 @@ export default function Navbar() {
   return (
     <>
       <header
+        style={{ position: "sticky", top: 0 }}
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           isScrolled
             ? "bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#EAE5D9] shadow-[0_2px_20px_rgba(0,0,0,0.06)]"
             : "bg-[#FFFFFF] border-b border-[#EAE5D9]/60"
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-20 md:h-24 flex items-center justify-between">
-          {/* Left section: Search & Left Navigation */}
-          <div className="flex items-center space-x-6 lg:space-x-8 flex-1">
+        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-20 md:h-24 flex items-center justify-between">
+          {/* Left section: App Logo */}
+          <div className="flex items-center space-x-4">
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(true)}
@@ -48,130 +49,127 @@ export default function Navbar() {
               <Menu className="w-6 h-6" />
             </button>
 
+            {/* App Logo: MIYA JI (top) and OUD (bottom) */}
+            <Link href="/" className="group flex flex-col items-center justify-center leading-tight py-1 flex-shrink-0">
+              <span className="font-serif text-[#DCA52D] group-hover:text-[#B8861B] text-lg sm:text-xl md:text-[22px] font-bold tracking-[0.2em] uppercase transition-colors whitespace-nowrap">
+                MIYA JI
+              </span>
+              <span className="font-serif text-[#DCA52D] group-hover:text-[#B8861B] text-[10px] sm:text-[11px] font-semibold tracking-[0.45em] uppercase transition-colors -mt-0.5 pl-[0.45em]">
+                OUD
+              </span>
+            </Link>
+          </div>
+
+          {/* Center section: Navigation Tabs (Centered in Navbar) */}
+          <nav className="hidden lg:flex items-center space-x-7 xl:space-x-9 text-xs uppercase tracking-[0.2em] font-medium text-[#1A1A1A] absolute left-1/2 -translate-x-1/2">
+            <Link
+              href="/"
+              className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
+            >
+              Home
+            </Link>
+
+            {/* Catalog Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setCatalogOpen(true)}
+              onMouseLeave={() => setCatalogOpen(false)}
+            >
+              <button
+                onClick={() => setCatalogOpen(!catalogOpen)}
+                className="flex items-center space-x-1.5 hover:text-[#DCA52D] transition-colors py-1 uppercase tracking-[0.2em]"
+              >
+                <span>Catalog</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    catalogOpen ? "rotate-180 text-[#DCA52D]" : ""
+                  }`}
+                />
+              </button>
+
+              {catalogOpen && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-[#FFFFFF] border border-[#EAE5D9] shadow-xl py-3 rounded-xl backdrop-blur-md z-50">
+                  <Link
+                    href="#top-sellers"
+                    className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
+                    onClick={() => setCatalogOpen(false)}
+                  >
+                    Best Sellers
+                  </Link>
+                  <Link
+                    href="#categories"
+                    className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
+                    onClick={() => setCatalogOpen(false)}
+                  >
+                    All Perfumes
+                  </Link>
+                  <Link
+                    href="#categories"
+                    className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
+                    onClick={() => setCatalogOpen(false)}
+                  >
+                    Attars
+                  </Link>
+                  <Link
+                    href="#bakhoor"
+                    className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
+                    onClick={() => setCatalogOpen(false)}
+                  >
+                    Bakhoor Sets
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="#stores"
+              className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
+            >
+              Stores
+            </Link>
+            <Link
+              href="#story"
+              className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
+            >
+              About Us
+            </Link>
+            <Link
+              href="#footer"
+              className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Right section: Search, User Account, and Shopping Bag Icons */}
+          <div className="flex items-center space-x-5 sm:space-x-6 text-[#1A1A1A]">
             {/* Search Icon */}
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="text-[#1A1A1A] hover:text-[#DCA52D] transition-colors p-1"
+              className="hover:text-[#DCA52D] transition-colors p-1"
               aria-label="Search"
             >
               <Search className="w-5 h-5 stroke-[1.75]" />
             </button>
 
-            {/* Desktop Left Nav Links */}
-            <nav className="hidden lg:flex items-center space-x-8 text-xs uppercase tracking-[0.2em] font-medium text-[#1A1A1A]">
-              <Link
-                href="/"
-                className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
-              >
-                Home
-              </Link>
+            {/* Account Icon */}
+            <button
+              className="hover:text-[#DCA52D] transition-colors p-1 hidden sm:block"
+              aria-label="User Account"
+            >
+              <User className="w-5 h-5 stroke-[1.75]" />
+            </button>
 
-              {/* Catalog Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setCatalogOpen(true)}
-                onMouseLeave={() => setCatalogOpen(false)}
-              >
-                <button
-                  onClick={() => setCatalogOpen(!catalogOpen)}
-                  className="flex items-center space-x-1.5 hover:text-[#DCA52D] transition-colors py-1 uppercase tracking-[0.2em]"
-                >
-                  <span>Catalog</span>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      catalogOpen ? "rotate-180 text-[#DCA52D]" : ""
-                    }`}
-                  />
-                </button>
-
-                {catalogOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-[#FFFFFF] border border-[#EAE5D9] shadow-xl py-3 rounded-xl backdrop-blur-md">
-                    <Link
-                      href="#top-sellers"
-                      className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
-                      onClick={() => setCatalogOpen(false)}
-                    >
-                      Best Sellers
-                    </Link>
-                    <Link
-                      href="#categories"
-                      className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
-                      onClick={() => setCatalogOpen(false)}
-                    >
-                      All Perfumes
-                    </Link>
-                    <Link
-                      href="#categories"
-                      className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
-                      onClick={() => setCatalogOpen(false)}
-                    >
-                      Attars
-                    </Link>
-                    <Link
-                      href="#bakhoor"
-                      className="block px-5 py-2.5 text-xs tracking-wider text-[#333333] hover:text-[#DCA52D] hover:bg-[#FBF9F5] transition-colors"
-                      onClick={() => setCatalogOpen(false)}
-                    >
-                      Bakhoor Sets
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </nav>
-          </div>
-
-          {/* Centered Brand Logo Text (Clean Standalone Luxury Brand Name, No Subtitle) */}
-          <div className="flex-shrink-0 flex items-center justify-center px-2 sm:px-4">
-            <Link href="/" className="group flex items-center justify-center py-1">
-              <span className="font-serif text-[#DCA52D] group-hover:text-[#B8861B] text-xl sm:text-2xl md:text-[25px] font-bold tracking-[0.28em] uppercase transition-colors whitespace-nowrap">
-                {SITE_CONFIG.name}
+            {/* Cart Icon with Gold Badge */}
+            <button
+              className="hover:text-[#DCA52D] transition-colors relative p-1"
+              aria-label="Shopping Bag"
+            >
+              <ShoppingBag className="w-5 h-5 stroke-[1.75]" />
+              <span className="absolute -top-1 -right-1 bg-[#DCA52D] text-[#FFFFFF] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                0
               </span>
-            </Link>
-          </div>
-
-          {/* Right section: Right Navigation & Action Icons */}
-          <div className="flex items-center justify-end space-x-6 lg:space-x-8 flex-1">
-            {/* Desktop Right Nav Links */}
-            <nav className="hidden lg:flex items-center space-x-8 text-xs uppercase tracking-[0.2em] font-medium text-[#1A1A1A]">
-              <Link
-                href="#footer"
-                className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
-              >
-                Contact
-              </Link>
-              <Link
-                href="#stores"
-                className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
-              >
-                Stores
-              </Link>
-              <Link
-                href="#story"
-                className="hover:text-[#DCA52D] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#DCA52D] hover:after:w-full after:transition-all"
-              >
-                About Us
-              </Link>
-            </nav>
-
-            {/* Account & Cart Icons */}
-            <div className="flex items-center space-x-5 text-[#1A1A1A]">
-              <button
-                className="hover:text-[#DCA52D] transition-colors p-1"
-                aria-label="User Account"
-              >
-                <User className="w-5 h-5 stroke-[1.75]" />
-              </button>
-
-              <button
-                className="hover:text-[#DCA52D] transition-colors relative p-1"
-                aria-label="Shopping Bag"
-              >
-                <ShoppingBag className="w-5 h-5 stroke-[1.75]" />
-                <span className="absolute -top-1 -right-1 bg-[#DCA52D] text-[#FFFFFF] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </button>
-            </div>
+            </button>
           </div>
         </div>
 
@@ -214,10 +212,13 @@ export default function Navbar() {
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center"
+                  className="flex flex-col items-start leading-tight"
                 >
-                  <span className="font-serif text-[#DCA52D] text-xl font-bold tracking-[0.26em] uppercase">
-                    {SITE_CONFIG.name}
+                  <span className="font-serif text-[#DCA52D] text-lg sm:text-xl font-bold tracking-[0.2em] uppercase">
+                    MIYA JI
+                  </span>
+                  <span className="font-serif text-[#DCA52D] text-[10px] sm:text-[11px] font-semibold tracking-[0.45em] uppercase -mt-0.5 pl-[0.45em]">
+                    OUD
                   </span>
                 </Link>
                 <button

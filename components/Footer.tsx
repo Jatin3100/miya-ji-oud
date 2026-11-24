@@ -27,7 +27,7 @@ export default function Footer() {
             <h3 className="text-[#1A1A1A] text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-5">
               ABOUT {SITE_CONFIG.name}
             </h3>
-            <p className="text-[#666666] text-xs leading-relaxed font-light">
+            <p className="text-[#2C2620] text-xs sm:text-[13px] leading-relaxed font-normal">
               We believe that a perfumer is a poet or a storyteller who use
               intangible ingredients to create emotions. The main idea behind {SITE_CONFIG.name} is to Abstract memories that evoke our cores. We paint
               pictures without using paint. We are storytellers who do not need
@@ -41,9 +41,9 @@ export default function Footer() {
             <h3 className="text-[#1A1A1A] text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-5">
               CUSTOMER CARE
             </h3>
-            <div className="space-y-3 text-xs text-[#666666] font-light leading-relaxed">
+            <div className="space-y-3 text-xs sm:text-[13px] text-[#2C2620] font-normal leading-relaxed">
               <p>
-                <span className="text-[#1A1A1A] font-medium">Phone:</span>{" "}
+                <span className="text-[#1A1A1A] font-semibold">Phone:</span>{" "}
                 <a
                   href="tel:+919888881908"
                   className="hover:text-[#DCA52D] transition-colors"
@@ -52,16 +52,16 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                <span className="text-[#1A1A1A] font-medium">Mail:</span>{" "}
+                <span className="text-[#1A1A1A] font-semibold">Mail:</span>{" "}
                 <a
-                  href="mailto:info@oudarabiadubai.com"
+                  href="mailto:concierge@miyajioud.com"
                   className="hover:text-[#DCA52D] transition-colors"
                 >
-                  info@oudarabiadubai.com
+                  concierge@miyajioud.com
                 </a>
               </p>
               <p>
-                <span className="text-[#1A1A1A] font-medium">Address:</span>{" "}
+                <span className="text-[#1A1A1A] font-semibold">Address:</span>{" "}
                 2266 Phase 7 Mohali Punjab 160062
               </p>
             </div>
@@ -72,7 +72,7 @@ export default function Footer() {
             <h3 className="text-[#1A1A1A] text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-5">
               QUICK LINKS
             </h3>
-            <ul className="space-y-2.5 text-xs text-[#666666] font-light">
+            <ul className="space-y-2.5 text-xs sm:text-[13px] text-[#2C2620] font-normal">
               <li>
                 <Link
                   href="#top-sellers"
@@ -214,8 +214,8 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom / Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#777777] font-light space-y-3 sm:space-y-0">
-          <p>© 2026 {SITE_CONFIG.name} PRIVATE LIMITED, All rights reserved</p>
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#3A332C] font-normal space-y-3 sm:space-y-0">
+          <p>© 2026 {SITE_CONFIG.name} PRIVATE LIMITED. All rights reserved.</p>
           <p className="hover:text-[#DCA52D] transition-colors">
             Powered by Luxury Craftsmanship
           </p>

@@ -12,36 +12,38 @@ import FloatingButtons from "@/components/FloatingButtons";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#FFFFFF] text-[#1A1A1A] selection:bg-[#DCA52D] selection:text-white overflow-x-hidden">
-      {/* 1. Header / Navbar */}
+    <div className="relative min-h-screen bg-[#FFFFFF] text-[#1A1A1A] selection:bg-[#DCA52D] selection:text-white">
+      {/* 1. Header / Navbar (Sticky at the top of the viewport) */}
       <Navbar />
 
-      {/* 2. Hero Section */}
-      <Hero />
+      <main>
+        {/* 2. Hero Section */}
+        <Hero />
 
-      {/* 3. Top Sellers */}
-      <TopSellers />
+        {/* 3. Top Sellers */}
+        <TopSellers />
 
-      {/* 4. Shop by Category */}
-      <ShopByCategory />
+        {/* 4. Shop by Category */}
+        <ShopByCategory />
 
-      {/* 5. Bakhoor Set */}
-      <BakhoorSet />
+        {/* 5. Bakhoor Set */}
+        <BakhoorSet />
 
-      {/* 6. Featured Section */}
-      <Featured />
+        {/* 6. Featured Section */}
+        <Featured />
 
-      {/* 7. Boutique Retail Stores */}
-      <BoutiqueStores />
+        {/* 7. Boutique Retail Stores */}
+        <BoutiqueStores />
 
-      {/* 8. A Fragrance Story */}
-      <FragranceStory />
+        {/* 8. A Fragrance Story */}
+        <FragranceStory />
 
-      {/* 9. Footer */}
-      <Footer />
+        {/* 9. Footer */}
+        <Footer />
 
-      {/* 10. Floating Action Buttons */}
-      <FloatingButtons />
-    </main>
+        {/* 10. Floating Action Buttons */}
+        <FloatingButtons />
+      </main>
+    </div>
   );
 }

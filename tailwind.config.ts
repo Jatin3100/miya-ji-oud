@@ -26,8 +26,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-poppins)", "sans-serif"],
-        serif: ["var(--font-cinzel)", "serif"],
+        sans: ["var(--font-montserrat)", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
       },
       letterSpacing: {
         widest: ".25em",

@@ -11,9 +11,9 @@ export default function FragranceStory() {
           </h2>
           <div className="w-10 h-[2px] bg-[#DCA52D] mx-auto mb-4" />
           <div className="max-w-3xl mx-auto">
-            <p className="text-[#555555] text-xs sm:text-[13px] md:text-sm font-normal leading-relaxed tracking-wide">
-              Luxury perfumes with blended Nature and most iconic fragrances, inspired
-              by the scent of natural flowers and natural resources. The Jewel of Dubai.
+            <p className="text-[#2C2620] text-sm sm:text-[15px] font-normal leading-relaxed tracking-wide">
+              Luxury perfumes blended with Nature and iconic oriental accords, inspired
+              by royal heritage, natural botanicals, and rare agarwood. The signature of Miya Ji Oud.
             </p>
           </div>
         </ScrollReveal>

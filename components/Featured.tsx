@@ -38,13 +38,16 @@ export default function Featured() {
           {/* Right Column: Heading, Description, and Golden Button */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left lg:pl-6">
             <ScrollReveal direction="up" delay={200} duration={750}>
-              <h2 className="text-[#DCA52D] text-lg sm:text-xl md:text-2xl font-medium tracking-[0.25em] uppercase mb-4">
-                Featured
+              <span className="text-[#DCA52D] text-[11px] sm:text-xs font-semibold tracking-[0.3em] uppercase block mb-2">
+                Exquisite Craftsmanship
+              </span>
+              <h2 className="text-[#1A1A1A] font-serif text-2xl sm:text-3xl font-normal tracking-[0.1em] uppercase mb-4">
+                The Royal Gallery
               </h2>
 
-              <p className="text-[#555555] text-xs sm:text-sm leading-relaxed max-w-md mb-8 font-light tracking-wide">
+              <p className="text-[#2C2620] text-xs sm:text-sm leading-relaxed max-w-md mb-8 font-normal tracking-wide">
                 Immerse yourself in our meticulously curated image gallery,
-                designed to assist you in finding the perfect product.
+                showcasing the regal artistry, bottle craftsmanship, and rich amber essences of Miya Ji Oud.
               </p>
 
               <Link
