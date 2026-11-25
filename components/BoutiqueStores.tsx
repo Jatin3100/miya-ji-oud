@@ -46,7 +46,7 @@ export default function BoutiqueStores() {
                 </h3>
 
                 <Link
-                  href="#store-locator"
+                  href="/stores"
                   className="inline-block bg-[#DCA52D] hover:bg-[#B8861B] text-[#FFFFFF] font-semibold text-[11px] sm:text-xs tracking-[0.2em] uppercase px-6 py-2.5 sm:py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-[0_4px_18px_rgba(220,165,45,0.4)] hover:-translate-y-0.5"
                 >
                   FIND LOCATIONS

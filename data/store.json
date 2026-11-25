@@ -1,0 +1,438 @@
+{
+  "products": [
+    {
+      "id": "jannat-e-zuhur",
+      "name": "Jannat E Zuhur (100ml)",
+      "subtitle": "Eau De Parfum",
+      "price": "₹ 6,290.00 /-",
+      "priceNumeric": 6290,
+      "image": "/assets/Jannat-e-zuhur-1.jpg",
+      "category": "perfumes",
+      "volume": "100ml",
+      "isTopSeller": true,
+      "isFeatured": true,
+      "stock": 24,
+      "rating": 4.9,
+      "reviewsCount": 142,
+      "badge": "Bestseller",
+      "description": "An opulent celestial bouquet of white florals, Arabian taif rose, and crystalline ambergris, finished with a subtle aged oud base.",
+      "notes": {
+        "top": [
+          "Taif Rose",
+          "White Jasmine",
+          "Bergamot"
+        ],
+        "heart": [
+          "Precious Amber",
+          "Lily of the Valley",
+          "Cardamom"
+        ],
+        "base": [
+          "Royal Agarwood",
+          "White Musk",
+          "Cedarwood"
+        ]
+      }
+    },
+    {
+      "id": "voice-of-the-soul",
+      "name": "Voice of the soul (100ml)",
+      "subtitle": "Eau De Parfum",
+      "price": "₹ 6,290.00 /-",
+      "priceNumeric": 6290,
+      "image": "/assets/380106563_733516658642350_5647525499345431176_n.png",
+      "category": "perfumes",
+      "volume": "100ml",
+      "isTopSeller": true,
+      "isFeatured": true,
+      "stock": 18,
+      "rating": 5,
+      "reviewsCount": 98,
+      "badge": "Signature",
+      "description": "Deep meditative agarwood enriched by smoky birch, warm cinnamon, and Madagascar vanilla, evoking inner spiritual transcendence.",
+      "notes": {
+        "top": [
+          "Smoky Incense",
+          "Pink Pepper",
+          "Cinnamon"
+        ],
+        "heart": [
+          "Cambodian Oud",
+          "Leather Accord",
+          "Nutmeg"
+        ],
+        "base": [
+          "Bourbon Vanilla",
+          "Sandalwood",
+          "Ambergris"
+        ]
+      }
+    },
+    {
+      "id": "nadeem",
+      "name": "NADEEM (100ml)",
+      "subtitle": "Eau De Parfum",
+      "price": "₹ 6,290.00 /-",
+      "priceNumeric": 6290,
+      "image": "/assets/image3.jpg",
+      "category": "perfumes",
+      "volume": "100ml",
+      "isTopSeller": true,
+      "isFeatured": false,
+      "stock": 15,
+      "rating": 4.8,
+      "reviewsCount": 76,
+      "badge": "Bestseller",
+      "description": "The quintessential royal companion fragrance. An energetic burst of saffron and blood orange transitioning to dry vetiver and smoked oud.",
+      "notes": {
+        "top": [
+          "Saffron",
+          "Blood Orange",
+          "Grapefruit"
+        ],
+        "heart": [
+          "Patchouli",
+          "Damask Rose",
+          "Clove"
+        ],
+        "base": [
+          "Hindi Oud",
+          "Dry Vetiver",
+          "Golden Musk"
+        ]
+      }
+    },
+    {
+      "id": "dakhoon",
+      "name": "Dakhoon (100ml)",
+      "subtitle": "Eau De Parfum",
+      "price": "₹ 5,990.00 /-",
+      "priceNumeric": 5990,
+      "image": "/assets/Dakhoon.jpg",
+      "category": "perfumes",
+      "volume": "100ml",
+      "isTopSeller": true,
+      "isFeatured": false,
+      "stock": 30,
+      "rating": 4.9,
+      "reviewsCount": 115,
+      "badge": "Popular",
+      "description": "Inspired by ceremonial incense smoke, Dakhoon blends crushed frankincense with rich labdanum and sensual tonka bean.",
+      "notes": {
+        "top": [
+          "Frankincense",
+          "Mandarin Zest",
+          "Myrrh"
+        ],
+        "heart": [
+          "Labdanum",
+          "Golden Honey",
+          "Oud Flakes"
+        ],
+        "base": [
+          "Tonka Bean",
+          "Dark Benzoin",
+          "Oakmoss"
+        ]
+      }
+    },
+    {
+      "id": "mukhtalif",
+      "name": "MUKHTALIF (100ml)",
+      "subtitle": "Eau De Parfum",
+      "price": "₹ 6,290.00 /-",
+      "priceNumeric": 6290,
+      "image": "/assets/image2.jpg",
+      "category": "perfumes",
+      "volume": "100ml",
+      "isTopSeller": true,
+      "isFeatured": false,
+      "stock": 21,
+      "rating": 4.8,
+      "reviewsCount": 89,
+      "badge": "Exclusive",
+      "description": "A bold, avant-garde contrast of fresh green cypress, spicy juniper, and deep animalic Assam agarwood.",
+      "notes": {
+        "top": [
+          "Cypress",
+          "Juniper Berry",
+          "Italian Lemon"
+        ],
+        "heart": [
+          "Lavender",
+          "Black Cardamom",
+          "Nutmeg"
+        ],
+        "base": [
+          "Assam Oud",
+          "Virginia Cedar",
+          "Castoreum Accord"
+        ]
+      }
+    },
+    {
+      "id": "pure-oud",
+      "name": "Pure Oud",
+      "subtitle": "Eau De Parfum",
+      "price": "₹ 6,290.00 /-",
+      "priceNumeric": 6290,
+      "image": "/assets/433C27EE-DD11-4D88-B8E0-595214854924.jpg",
+      "category": "perfumes",
+      "volume": "100ml",
+      "isTopSeller": true,
+      "isFeatured": true,
+      "stock": 12,
+      "rating": 5,
+      "reviewsCount": 164,
+      "badge": "Reserve",
+      "description": "Single-origin pure distilled agarwood extract aged for 12 years. Rich, velvety, and deeply hypnotic.",
+      "notes": {
+        "top": [
+          "Wild Oud Resin",
+          "Sweet Saffron"
+        ],
+        "heart": [
+          "Aged Agarwood Chips",
+          "Balsam Fir"
+        ],
+        "base": [
+          "Rare Kalakassi Oud",
+          "Warm Amber Resin"
+        ]
+      }
+    },
+    {
+      "id": "bakhoor-set",
+      "name": "Bakhoor Set (Gold Brass) (50 gms)",
+      "subtitle": "Incense Wood & Burner",
+      "price": "₹ 4,990.00 /-",
+      "priceNumeric": 4990,
+      "image": "/assets/WhatsApp-Image-2021-01-18-at-12.25.35-PM-1.jpg",
+      "category": "bakhoor",
+      "volume": "50 gms",
+      "isTopSeller": false,
+      "isFeatured": true,
+      "stock": 40,
+      "rating": 4.9,
+      "reviewsCount": 83,
+      "badge": "Gold Brass Edition",
+      "description": "Hand-hammered gold brass burner accompanied by 50 grams of premier agarwood chips soaked in aromatic oils and floral resins.",
+      "notes": {
+        "top": [
+          "Oudh Wood Chips",
+          "Natural Resins"
+        ],
+        "heart": [
+          "Rose Essence",
+          "Musk Oil"
+        ],
+        "base": [
+          "Sandalwood Oil",
+          "Amber Paste"
+        ]
+      }
+    },
+    {
+      "id": "dehn-al-oudh-cambodi",
+      "name": "Dehn Al Oudh Cambodi (12ml)",
+      "subtitle": "Pure Concentrated Oil (Attar)",
+      "price": "₹ 5,490.00 /-",
+      "priceNumeric": 5490,
+      "image": "/assets/C1_1.png",
+      "category": "attars",
+      "volume": "12ml",
+      "isTopSeller": true,
+      "isFeatured": true,
+      "stock": 18,
+      "rating": 5,
+      "reviewsCount": 112,
+      "badge": "100% Pure Attar",
+      "description": "Uncut, alcohol-free pure aged Cambodian agarwood distilled in traditional copper deghs. Sweet, balsamic, and ancient.",
+      "notes": {
+        "top": [
+          "Cambodian Resin",
+          "Sweet Spices"
+        ],
+        "heart": [
+          "Smoky Birch",
+          "Aged Leather"
+        ],
+        "base": [
+          "Wild Oudh",
+          "Mysore Sandalwood"
+        ]
+      }
+    },
+    {
+      "id": "royal-taif-rose-attar",
+      "name": "Royal Taif Rose Attar (12ml)",
+      "subtitle": "Pure Concentrated Oil (Attar)",
+      "price": "₹ 4,790.00 /-",
+      "priceNumeric": 4790,
+      "image": "/assets/Snapinsta.app_363778411_18053786449452294_2148762455076118183_n_1080.jpg",
+      "category": "attars",
+      "volume": "12ml",
+      "isTopSeller": false,
+      "isFeatured": true,
+      "stock": 25,
+      "rating": 4.9,
+      "reviewsCount": 68,
+      "badge": "Mountain Harvest",
+      "description": "Petals of 10,000 mountain Taif roses hydro-distilled into a pure Mysore sandalwood base. Exquisite, fresh, and eternal.",
+      "notes": {
+        "top": [
+          "Taif Rose Petals",
+          "Fresh Morning Dew"
+        ],
+        "heart": [
+          "Damask Rose Absolute",
+          "Cardamom"
+        ],
+        "base": [
+          "Sandalwood Base",
+          "White Amber"
+        ]
+      }
+    },
+    {
+      "id": "mukhallat-al-emirates",
+      "name": "Mukhallat Al Emirates (12ml)",
+      "subtitle": "Royal Blend Concentrated Attar",
+      "price": "₹ 5,190.00 /-",
+      "priceNumeric": 5190,
+      "image": "/assets/Snapinsta.app_361915919_18052701916452294_5908369295422948022_n_1080_1.jpg",
+      "category": "attars",
+      "volume": "12ml",
+      "isTopSeller": true,
+      "isFeatured": true,
+      "stock": 16,
+      "rating": 4.9,
+      "reviewsCount": 94,
+      "badge": "Royal Blend",
+      "description": "The definitive royal signature blend of dark Assam oud, golden ambergris, saffron, and deer musk accord.",
+      "notes": {
+        "top": [
+          "Kashmiri Saffron",
+          "Bergamot"
+        ],
+        "heart": [
+          "Ambergris",
+          "Taif Rose"
+        ],
+        "base": [
+          "Hindi Oud",
+          "Golden Musk"
+        ]
+      }
+    },
+    {
+      "id": "royal-kalakassi-bakhoor-chips",
+      "name": "Royal Kalakassi Bakhoor Chips (75 gms)",
+      "subtitle": "Aged Agarwood Wood Chips",
+      "price": "₹ 5,890.00 /-",
+      "priceNumeric": 5890,
+      "image": "/assets/WhatsApp-Image-2021-01-18-at-12.25.35-PM-1.jpg",
+      "category": "bakhoor",
+      "volume": "75 gms",
+      "isTopSeller": true,
+      "isFeatured": true,
+      "stock": 35,
+      "rating": 5,
+      "reviewsCount": 77,
+      "badge": "Wild Agarwood",
+      "description": "Decade-aged wild agarwood chips saturated in cold-pressed taif rose oil, frankincense tears, and royal ambergris.",
+      "notes": {
+        "top": [
+          "Aquilaria Resin",
+          "Sweet Spices"
+        ],
+        "heart": [
+          "Floral Taif Rose",
+          "Warm Amber"
+        ],
+        "base": [
+          "Smoked Agarwood",
+          "Natural Benzoin"
+        ]
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "perfumes",
+      "title": "PERFUMES",
+      "subtitle": "Eau De Parfum Collection",
+      "slug": "perfumes",
+      "image": "/assets/Snapinsta.app_363778411_18053786449452294_2148762455076118183_n_1080.jpg",
+      "href": "/collections/perfumes",
+      "count": 18,
+      "description": "Long-lasting artisanal perfumes crafted with precious extracts and aged oud oils."
+    },
+    {
+      "id": "attars",
+      "title": "ATTARS",
+      "subtitle": "Pure Concentrated Perfume Oils",
+      "slug": "attars",
+      "image": "/assets/C1_1.png",
+      "href": "/collections/attars",
+      "count": 12,
+      "description": "100% alcohol-free traditional concentrated perfume oils distilled in pure sandalwood bases."
+    }
+  ],
+  "featuredGallery": [
+    {
+      "id": "gallery-1",
+      "image": "/assets/Snapinsta.app_373297080_18058625173452294_7210085031108326647_n_1080.jpg",
+      "title": "Golden Flacon in Sunlight",
+      "alt": "Miya Ji Oud Perfume Bottle in Sunlight"
+    },
+    {
+      "id": "gallery-2",
+      "image": "/assets/Snapinsta.app_361915919_18052701916452294_5908369295422948022_n_1080_1.jpg",
+      "title": "Luxury Fragrance Duo",
+      "alt": "Luxury Fragrance Duo Display"
+    }
+  ],
+  "siteConfig": {
+    "name": "MIYA JI OUD",
+    "subtitle": "",
+    "tagline": "Luxury Perfumes & Attars",
+    "fullName": "Miya Ji Oud | Luxury Perfumes & Attars",
+    "description": "Purveyors of rare royal oudhs, artisanal attars, and bespoke botanical extractions. Handcrafted luxury perfumery.",
+    "phone": "+91-9888881908",
+    "email": "concierge@miyajioud.com",
+    "address": "2266 Phase 7 Mohali Punjab 160062",
+    "currency": "₹",
+    "freeShippingThreshold": 4999
+  },
+  "cart": [
+    {
+      "productId": "jannat-e-zuhur",
+      "quantity": 1
+    }
+  ],
+  "subscribers": [
+    {
+      "email": "test@example.com",
+      "subscribedAt": "2026-11-25T05:23:27.469Z"
+    },
+    {
+      "email": "royal.customer@miyajioud.com",
+      "subscribedAt": "2026-11-25T05:28:37.754Z"
+    },
+    {
+      "email": "test@yopmail.com",
+      "subscribedAt": "2026-11-25T05:43:00.731Z"
+    }
+  ],
+  "contactMessages": [
+    {
+      "id": "msg_1795584518471_gjxkhh",
+      "name": "His Highness",
+      "email": "patron@palace.ae",
+      "phone": "+971501234567",
+      "message": "Inquiring about bespoke pure aged Kalakassi oud flacons.",
+      "createdAt": "2026-11-25T05:28:38.471Z"
+    }
+  ]
+}

@@ -1,17 +1,38 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FEATURED_GALLERY } from "@/data/products";
+import { FEATURED_GALLERY as INITIAL_GALLERY } from "@/data/products";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Featured() {
+  const [gallery, setGallery] = useState(INITIAL_GALLERY);
+
+  useEffect(() => {
+    async function fetchFeatured() {
+      try {
+        const res = await fetch("/api/featured");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+            setGallery(json.data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch dynamic featured gallery:", err);
+      }
+    }
+    fetchFeatured();
+  }, []);
+
   return (
     <section id="featured" className="w-full bg-[#FBF9F5] py-16 md:py-24 border-y border-[#EAE5D9]/60">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Product Gallery Images with Staggered Scroll Entrance */}
           <div className="lg:col-span-7 grid grid-cols-2 gap-4 sm:gap-6">
-            {FEATURED_GALLERY.map((item, index) => (
+            {gallery.map((item, index) => (
               <ScrollReveal
                 key={item.id}
                 direction="up"
@@ -39,7 +60,7 @@ export default function Featured() {
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left lg:pl-6">
             <ScrollReveal direction="up" delay={200} duration={750}>
               <span className="text-[#DCA52D] text-[11px] sm:text-xs font-semibold tracking-[0.3em] uppercase block mb-2">
-                Exquisite Craftsmanship
+                Exquisite Craftsmanship • Live API
               </span>
               <h2 className="text-[#1A1A1A] font-serif text-2xl sm:text-3xl font-normal tracking-[0.1em] uppercase mb-4">
                 The Royal Gallery

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/data/products";
+import { AuthProvider } from "@/context/AuthContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -32,7 +33,7 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${playfair.variable} antialiased bg-[#FFFFFF] text-[#1A1A1A] min-h-screen selection:bg-[#DCA52D] selection:text-white`}
       >
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

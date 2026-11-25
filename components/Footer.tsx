@@ -7,13 +7,32 @@ import { SITE_CONFIG } from "@/data/products";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [statusMsg, setStatusMsg] = useState<{ text: string; error?: boolean } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail("");
+    if (!email) return;
+
+    try {
+      setSubmitting(true);
+      setStatusMsg(null);
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatusMsg({ text: data.message || "Thank you for subscribing to the Royal Circle!" });
+        setEmail("");
+      } else {
+        setStatusMsg({ text: data.error || "Failed to subscribe", error: true });
+      }
+    } catch (err) {
+      setStatusMsg({ text: "Network error. Please try again later.", error: true });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -75,23 +94,23 @@ export default function Footer() {
             <ul className="space-y-2.5 text-xs sm:text-[13px] text-[#2C2620] font-normal">
               <li>
                 <Link
-                  href="#top-sellers"
+                  href="/about"
                   className="hover:text-[#DCA52D] transition-colors"
                 >
-                  Search
+                  About Us
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#footer"
+                  href="/contact"
                   className="hover:text-[#DCA52D] transition-colors"
                 >
-                  Contact us
+                  Contact Us
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#stores"
+                  href="/stores"
                   className="hover:text-[#DCA52D] transition-colors"
                 >
                   Store Locator
@@ -149,15 +168,20 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
+                  disabled={submitting}
                   aria-label="Subscribe to newsletter"
-                  className="bg-[#DCA52D] hover:bg-[#B8861B] text-[#FFFFFF] px-4 py-3 transition-colors flex items-center justify-center cursor-pointer shadow-md"
+                  className="bg-[#DCA52D] hover:bg-[#B8861B] text-[#FFFFFF] px-4 py-3 transition-colors flex items-center justify-center cursor-pointer shadow-md disabled:opacity-50"
                 >
                   <Mail className="w-4 h-4" />
                 </button>
               </div>
-              {subscribed && (
-                <p className="text-[#DCA52D] text-[11px] mt-2 font-medium">
-                  Thank you for subscribing!
+              {statusMsg && (
+                <p
+                  className={`text-[11px] mt-2 font-medium ${
+                    statusMsg.error ? "text-red-500" : "text-[#DCA52D]"
+                  }`}
+                >
+                  {statusMsg.text}
                 </p>
               )}
             </form>

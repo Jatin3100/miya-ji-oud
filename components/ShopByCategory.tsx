@@ -1,10 +1,31 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CATEGORIES } from "@/data/products";
+import { CATEGORIES as INITIAL_CATEGORIES } from "@/data/products";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function ShopByCategory() {
+  const [categories, setCategories] = useState(INITIAL_CATEGORIES);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await fetch("/api/categories");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+            setCategories(json.data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch dynamic categories:", err);
+      }
+    }
+    fetchCategories();
+  }, []);
+
   return (
     <section id="categories" className="w-full bg-[#FAF8F5] py-16 md:py-24 border-y border-[#EAE5D9]">
       <div className="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,7 +33,7 @@ export default function ShopByCategory() {
         <ScrollReveal direction="up" duration={600}>
           <div className="text-center mb-12 md:mb-16">
             <span className="text-[#DCA52D] text-[11px] sm:text-xs font-semibold tracking-[0.3em] uppercase block mb-1">
-              Curated Collections
+              Curated Collections • Live API
             </span>
             <h2 className="text-[#1A1A1A] font-serif text-2xl sm:text-3xl md:text-4xl font-normal tracking-[0.1em] uppercase">
               Shop by Category
@@ -23,7 +44,7 @@ export default function ShopByCategory() {
 
         {/* Two Centered Image Cards with Rounded Corners & Staggered Scroll Entrance */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {CATEGORIES.map((category, index) => (
+          {categories.map((category, index) => (
             <ScrollReveal
               key={category.id}
               direction="up"

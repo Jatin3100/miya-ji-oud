@@ -1,16 +1,41 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ShoppingBag, Star } from "lucide-react";
-import { TOP_SELLERS } from "@/data/products";
+import { ChevronLeft, ChevronRight, ShoppingBag, Star, Check } from "lucide-react";
+import { TOP_SELLERS as INITIAL_PRODUCTS, Product } from "@/data/products";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function TopSellers() {
+  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [loading, setLoading] = useState(false);
+  const [addingId, setAddingId] = useState<string | null>(null);
+  const [addedIds, setAddedIds] = useState<{ [id: string]: boolean }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Fetch dynamic products from the backend API
+  useEffect(() => {
+    async function loadDynamicProducts() {
+      try {
+        setLoading(true);
+        const res = await fetch("/api/products?type=top-sellers");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+            setProducts(json.data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load dynamic top sellers from API:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadDynamicProducts();
+  }, []);
 
   // Responsive cards per view (3 on desktop, 2 on tablet, 1 on mobile)
   useEffect(() => {
@@ -29,7 +54,7 @@ export default function TopSellers() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const maxIndex = Math.max(0, TOP_SELLERS.length - cardsPerView);
+  const maxIndex = Math.max(0, products.length - cardsPerView);
 
   // Ensure currentIndex stays within bounds when resizing
   useEffect(() => {
@@ -44,6 +69,31 @@ export default function TopSellers() {
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
+  };
+
+  // Add to Bag dynamic API action
+  const handleAddToCart = async (product: Product) => {
+    try {
+      setAddingId(product.id);
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      });
+
+      if (res.ok) {
+        // Dispatch global event so the Navbar cart counter updates dynamically
+        window.dispatchEvent(new Event("cartUpdated"));
+        setAddedIds((prev) => ({ ...prev, [product.id]: true }));
+        setTimeout(() => {
+          setAddedIds((prev) => ({ ...prev, [product.id]: false }));
+        }, 2200);
+      }
+    } catch (err) {
+      console.error("Failed to add product to cart:", err);
+    } finally {
+      setAddingId(null);
+    }
   };
 
   // Touch Swipe Handling
@@ -77,7 +127,7 @@ export default function TopSellers() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 md:mb-14 pb-4 border-b border-[#EAE5D9]">
             <div className="text-center sm:text-left">
               <span className="text-[#DCA52D] text-[11px] sm:text-xs font-semibold tracking-[0.3em] uppercase block mb-1">
-                Royal Fragrance Collection
+                Royal Fragrance Collection • Live API
               </span>
               <h2 className="text-[#1A1A1A] font-serif text-2xl sm:text-3xl md:text-4xl font-normal tracking-[0.1em] uppercase">
                 Top Sellers
@@ -105,7 +155,7 @@ export default function TopSellers() {
           </div>
         </ScrollReveal>
 
-        {/* 3-Card Slider Track (Shows 3 cards at a time on desktop, others on slide) */}
+        {/* 3-Card Slider Track (Dynamic from API) */}
         <div
           className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
           onTouchStart={handleTouchStart}
@@ -118,63 +168,87 @@ export default function TopSellers() {
               transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)`,
             }}
           >
-            {TOP_SELLERS.map((product, index) => (
-              <div
-                key={product.id}
-                style={{ width: `${100 / cardsPerView}%` }}
-                className="flex-shrink-0 px-3 sm:px-4"
-              >
-                <div className="group relative bg-[#FDFCF9] rounded-2xl border border-[#EAE5D9] p-4 sm:p-5 flex flex-col h-full shadow-[0_4px_25px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_45px_rgba(220,165,45,0.22)] hover:border-[#DCA52D] transition-all duration-500 hover:-translate-y-2">
-                  {/* Badge: Royal Bestseller */}
-                  <div className="absolute top-6 left-6 z-10 flex items-center space-x-1 bg-[#FFFFFF]/90 backdrop-blur-md border border-[#DCA52D]/60 px-2.5 py-1 rounded-full shadow-sm">
-                    <Star className="w-3 h-3 text-[#DCA52D] fill-[#DCA52D]" />
-                    <span className="text-[10px] font-semibold tracking-wider text-[#1A1A1A] uppercase">
-                      Bestseller
-                    </span>
-                  </div>
+            {products.map((product) => {
+              const isAdded = !!addedIds[product.id];
+              const isAdding = addingId === product.id;
 
-                  {/* Volume Tag */}
-                  <div className="absolute top-6 right-6 z-10 bg-[#1A1A1A]/80 backdrop-blur-md px-2.5 py-1 rounded-full">
-                    <span className="text-[10px] font-medium tracking-wider text-[#DCA52D] uppercase">
-                      {product.volume || "100ml"}
-                    </span>
-                  </div>
+              return (
+                <div
+                  key={product.id}
+                  style={{ width: `${100 / cardsPerView}%` }}
+                  className="flex-shrink-0 px-3 sm:px-4"
+                >
+                  <div className="group relative bg-[#FDFCF9] rounded-2xl border border-[#EAE5D9] p-4 sm:p-5 flex flex-col h-full shadow-[0_4px_25px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_45px_rgba(220,165,45,0.22)] hover:border-[#DCA52D] transition-all duration-500 hover:-translate-y-2">
+                    {/* Badge: Royal Bestseller */}
+                    <div className="absolute top-6 left-6 z-10 flex items-center space-x-1 bg-[#FFFFFF]/90 backdrop-blur-md border border-[#DCA52D]/60 px-2.5 py-1 rounded-full shadow-sm">
+                      <Star className="w-3 h-3 text-[#DCA52D] fill-[#DCA52D]" />
+                      <span className="text-[10px] font-semibold tracking-wider text-[#1A1A1A] uppercase">
+                        {product.category === "perfumes" ? "Bestseller" : "Royal Edition"}
+                      </span>
+                    </div>
 
-                  {/* Product Image Frame */}
-                  <div className="relative w-full aspect-square overflow-hidden bg-[#0A0A0A] rounded-xl border border-[#EAE5D9] mt-6">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110 group-hover:brightness-105"
-                    />
+                    {/* Volume Tag */}
+                    <div className="absolute top-6 right-6 z-10 bg-[#1A1A1A]/80 backdrop-blur-md px-2.5 py-1 rounded-full">
+                      <span className="text-[10px] font-medium tracking-wider text-[#DCA52D] uppercase">
+                        {product.volume || "100ml"}
+                      </span>
+                    </div>
 
-                    {/* Subtle Luxury Sheen Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl" />
-                  </div>
+                    {/* Product Image Frame */}
+                    <div className="relative w-full aspect-square overflow-hidden bg-[#0A0A0A] rounded-xl border border-[#EAE5D9] mt-6">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110 group-hover:brightness-105"
+                      />
 
-                  {/* Product Information */}
-                  <div className="mt-5 flex flex-col flex-grow items-center text-center">
-                    <span className="text-[#888888] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
-                      Eau De Parfum
-                    </span>
-                    <h3 className="text-[#1A1A1A] group-hover:text-[#DCA52D] font-serif text-sm sm:text-base font-semibold tracking-wider uppercase transition-colors line-clamp-1">
-                      {product.name}
-                    </h3>
-                    <p className="text-[#DCA52D] text-sm sm:text-base font-bold mt-2 tracking-wide">
-                      {product.price}
-                    </p>
+                      {/* Subtle Luxury Sheen Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl" />
+                    </div>
 
-                    {/* Quick Add / Discover Button */}
-                    <button className="mt-4 w-full py-2.5 px-4 bg-[#FFFFFF] hover:bg-[#DCA52D] text-[#1A1A1A] hover:text-[#FFFFFF] border border-[#EAE5D9] hover:border-[#DCA52D] rounded-xl text-xs font-semibold tracking-[0.18em] uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-sm hover:shadow-md cursor-pointer">
-                      <ShoppingBag className="w-3.5 h-3.5" />
-                      <span>Add to Bag</span>
-                    </button>
+                    {/* Product Information */}
+                    <div className="mt-5 flex flex-col flex-grow items-center text-center">
+                      <span className="text-[#888888] text-[10px] tracking-[0.25em] uppercase font-medium mb-1">
+                        {product.category === "attars" ? "Artisanal Attar" : "Eau De Parfum"}
+                      </span>
+                      <h3 className="text-[#1A1A1A] group-hover:text-[#DCA52D] font-serif text-sm sm:text-base font-semibold tracking-wider uppercase transition-colors line-clamp-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-[#DCA52D] text-sm sm:text-base font-bold mt-2 tracking-wide">
+                        {product.price}
+                      </p>
+
+                      {/* Quick Add / Discover Button with Dynamic API Call */}
+                      <button
+                        onClick={() => handleAddToCart(product)}
+                        disabled={isAdding}
+                        className={`mt-4 w-full py-2.5 px-4 rounded-xl text-xs font-semibold tracking-[0.18em] uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-sm hover:shadow-md cursor-pointer ${
+                          isAdded
+                            ? "bg-[#181512] text-[#DCA52D] border border-[#DCA52D]"
+                            : "bg-[#FFFFFF] hover:bg-[#DCA52D] text-[#1A1A1A] hover:text-[#FFFFFF] border border-[#EAE5D9] hover:border-[#DCA52D]"
+                        }`}
+                      >
+                        {isAdded ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-[#DCA52D]" />
+                            <span>Added to Bag</span>
+                          </>
+                        ) : isAdding ? (
+                          <span>Adding...</span>
+                        ) : (
+                          <>
+                            <ShoppingBag className="w-3.5 h-3.5" />
+                            <span>Add to Bag</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

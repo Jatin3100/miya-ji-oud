@@ -1,10 +1,54 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { ShoppingBag, Sparkles } from "lucide-react";
-import { BAKHOOR_PRODUCT } from "@/data/products";
+import { ShoppingBag, Sparkles, Check } from "lucide-react";
+import { BAKHOOR_PRODUCT as INITIAL_PRODUCT, Product } from "@/data/products";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function BakhoorSet() {
+  const [product, setProduct] = useState<Product>(INITIAL_PRODUCT);
+  const [adding, setAdding] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  useEffect(() => {
+    async function fetchBakhoor() {
+      try {
+        const res = await fetch("/api/bakhoor");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && json.primaryProduct) {
+            setProduct(json.primaryProduct);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch dynamic bakhoor product:", err);
+      }
+    }
+    fetchBakhoor();
+  }, []);
+
+  const handleAddToCart = async () => {
+    try {
+      setAdding(true);
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      });
+
+      if (res.ok) {
+        window.dispatchEvent(new Event("cartUpdated"));
+        setAdded(true);
+        setTimeout(() => setAdded(false), 2200);
+      }
+    } catch (err) {
+      console.error("Failed to add bakhoor to cart:", err);
+    } finally {
+      setAdding(false);
+    }
+  };
+
   return (
     <section id="bakhoor" className="w-full bg-[#FFFFFF] py-16 md:py-24">
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-12">
@@ -12,7 +56,7 @@ export default function BakhoorSet() {
         <ScrollReveal direction="up" duration={600}>
           <div className="text-center mb-12 md:mb-16">
             <span className="text-[#DCA52D] text-[11px] sm:text-xs font-semibold tracking-[0.3em] uppercase block mb-1">
-              Traditional Incense & Aromatics
+              Traditional Incense & Aromatics • Live API
             </span>
             <h2 className="text-[#1A1A1A] font-serif text-2xl sm:text-3xl md:text-4xl font-normal tracking-[0.1em] uppercase">
               Bakhoor Set
@@ -36,15 +80,15 @@ export default function BakhoorSet() {
               {/* Weight Tag */}
               <div className="absolute top-6 right-6 z-10 bg-[#1A1A1A]/80 backdrop-blur-md px-2.5 py-1 rounded-full">
                 <span className="text-[10px] font-medium tracking-wider text-[#DCA52D] uppercase">
-                  50 gms
+                  {product.volume || "50 gms"}
                 </span>
               </div>
 
               {/* Product Image Frame with Rounded Corners & Luxury Hover Effect */}
               <div className="relative w-full aspect-square overflow-hidden bg-[#0A0A0A] rounded-xl border border-[#EAE5D9] mt-6">
                 <Image
-                  src={BAKHOOR_PRODUCT.image}
-                  alt={BAKHOOR_PRODUCT.name}
+                  src={product.image}
+                  alt={product.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                   className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110 group-hover:brightness-105"
@@ -60,16 +104,35 @@ export default function BakhoorSet() {
                   Rare Incense Wood
                 </span>
                 <h3 className="text-[#1A1A1A] group-hover:text-[#DCA52D] font-serif text-sm sm:text-base font-semibold tracking-wider uppercase transition-colors">
-                  {BAKHOOR_PRODUCT.name}
+                  {product.name}
                 </h3>
                 <p className="text-[#DCA52D] text-sm sm:text-base font-bold mt-2 tracking-wide">
-                  {BAKHOOR_PRODUCT.price}
+                  {product.price}
                 </p>
 
-                {/* Quick Add Button */}
-                <button className="mt-4 w-full py-2.5 px-4 bg-[#FFFFFF] hover:bg-[#DCA52D] text-[#1A1A1A] hover:text-[#FFFFFF] border border-[#EAE5D9] hover:border-[#DCA52D] rounded-xl text-xs font-semibold tracking-[0.18em] uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-sm hover:shadow-md cursor-pointer">
-                  <ShoppingBag className="w-3.5 h-3.5" />
-                  <span>Add to Bag</span>
+                {/* Quick Add Button with Dynamic Cart API */}
+                <button
+                  onClick={handleAddToCart}
+                  disabled={adding}
+                  className={`mt-4 w-full py-2.5 px-4 rounded-xl text-xs font-semibold tracking-[0.18em] uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-sm hover:shadow-md cursor-pointer ${
+                    added
+                      ? "bg-[#181512] text-[#DCA52D] border border-[#DCA52D]"
+                      : "bg-[#FFFFFF] hover:bg-[#DCA52D] text-[#1A1A1A] hover:text-[#FFFFFF] border border-[#EAE5D9] hover:border-[#DCA52D]"
+                  }`}
+                >
+                  {added ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-[#DCA52D]" />
+                      <span>Added to Bag</span>
+                    </>
+                  ) : adding ? (
+                    <span>Adding...</span>
+                  ) : (
+                    <>
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Add to Bag</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>
