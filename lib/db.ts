@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import { getDatabase, isMongoConfigured } from "./mongodb";
+import { getDatabase, isMongoConfigured, getLastMongoError } from "./mongodb";
 
 export interface User {
   id: string;
@@ -202,6 +202,7 @@ export async function getDatabaseStatus(): Promise<{
   provider: "mongodb" | "local_json";
   isConfigured: boolean;
   connected: boolean;
+  mongoError?: string | null;
   counts: {
     products: number;
     categories: number;
@@ -242,6 +243,7 @@ export async function getDatabaseStatus(): Promise<{
     provider: "local_json",
     isConfigured,
     connected: true,
+    mongoError: getLastMongoError(),
     counts: {
       products: local.products.length,
       categories: local.categories.length,
@@ -857,8 +859,11 @@ export async function createUser(data: {
     if (db) {
       await ensureMongoSeeded();
       await db.collection("users").insertOne(newUser);
+      console.log(`[AUTH] Successfully saved user "${newUser.email}" to MongoDB Atlas.`);
       const { passwordHash: _, salt: __, ...safeUser } = newUser;
       return { success: true, user: safeUser };
+    } else {
+      console.warn(`[AUTH] MongoDB not connected (${getLastMongoError() || "No DB instance"}), falling back to local store for "${newUser.email}"`);
     }
   } catch (err) {
     console.warn("MongoDB createUser failed, writing to local store:", err);

@@ -12,11 +12,12 @@ export async function GET() {
         database: status.provider,
         mongodbConfigured: status.isConfigured,
         connected: status.connected,
+        mongoError: status.mongoError || null,
         statistics: status.counts,
         message:
           status.provider === "mongodb"
             ? "Connected to MongoDB! Data is permanently stored and synchronized in the cloud."
-            : "Currently running on local JSON storage (data/store.json). To activate MongoDB, set MONGODB_URI in .env.local or Vercel.",
+            : "Currently running on local fallback storage. Set MONGODB_URI in Vercel and allow 0.0.0.0/0 in MongoDB Atlas Network Access.",
         instructions: {
           step1: "Create a free MongoDB Atlas cluster at mongodb.com",
           step2: "Copy your connection string: mongodb+srv://<user>:<password>@cluster0.xxx.mongodb.net/miya_ji_oud?retryWrites=true&w=majority",
